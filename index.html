@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Quiz Bíblico Infinito</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; background: #f4f4f4; margin: 0; padding: 20px; }
+    #quiz-box { background: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); max-width: 500px; margin: auto; }
+    button { margin: 5px; padding: 12px; border: none; border-radius: 5px; background: #007BFF; color: white; font-size: 16px; cursor: pointer; }
+    button:hover { background: #0056b3; }
+    #feedback { margin-top: 15px; font-weight: bold; }
+    #score { margin-top: 15px; font-size: 18px; font-weight: bold; }
+    .tema-btn { width: 45%; margin: 5px; }
+  </style>
+</head>
+<body>
+  <h1>Quiz Bíblico 📖</h1>
+  <div id="quiz-box">
+    <p>Escolha um livro da Bíblia:</p>
+    <div>
+      <button class="tema-btn" onclick="setTema('genesis')">Gênesis</button>
+      <button class="tema-btn" onclick="setTema('salmos')">Salmos</button>
+      <button class="tema-btn" onclick="setTema('joao')">João</button>
+      <button class="tema-btn" onclick="setTema('mateus')">Mateus</button>
+      <button class="tema-btn" onclick="setTema('aleatorio')">Aleatório</button>
+    </div>
+    <button onclick="newQuestion()">Nova Pergunta</button>
+    <p id="question">Selecione um tema e clique em "Nova Pergunta".</p>
+    <div id="answers"></div>
+    <p id="feedback"></p>
+    <p id="score">Pontuação: 0</p>
+  </div>
+
+  <script>
+    let quizData = null;
+    let temaSelecionado = "aleatorio";
+    let score = 0;
+
+    // Carrega perguntas de arquivo externo
+    fetch("quiz.json")
+      .then(response => response.json())
+      .then(data => { quizData = data; });
+
+    function setTema(tema) {
+      temaSelecionado = tema;
+      document.getElementById("question").textContent = `Tema selecionado: ${tema.toUpperCase()}. Clique em "Nova Pergunta".`;
+      document.getElementById("answers").innerHTML = "";
+      document.getElementById("feedback").textContent = "";
+    }
+
+    function newQuestion() {
+      if (!quizData) {
+        document.getElementById("question").textContent = "Carregando perguntas...";
+        return;
+      }
+
+      let tema;
+      if (temaSelecionado === "aleatorio") {
+        let temas = Object.keys(quizData);
+        tema = temas[Math.floor(Math.random() * temas.length)];
+      } else {
+        tema = temaSelecionado;
+      }
+
+      let perguntas = quizData[tema];
+      let chosen = perguntas[Math.floor(Math.random() * perguntas.length)];
+
+      // Exibe pergunta
+      document.getElementById("question").textContent = chosen.pergunta;
+      let options = [chosen.correta, ...chosen.opcoes];
+      options.sort(() => Math.random() - 0.5);
+
+      // Cria botões
+      let answersDiv = document.getElementById("answers");
+      answersDiv.innerHTML = "";
+      options.forEach(opt => {
+        let btn = document.createElement("button");
+        btn.textContent = opt;
+        btn.onclick = () => checkAnswer(opt, chosen.correta);
+        answersDiv.appendChild(btn);
+      });
+
+      document.getElementById("feedback").textContent = "";
+    }
+
+    function checkAnswer(selected, correct) {
+      let feedback = document.getElementById("feedback");
+      if (selected === correct) {
+        feedback.textContent = "✅ Correto!";
+        feedback.style.color = "green";
+        score++;
+      } else {
+        feedback.textContent = `❌ Errado! A resposta certa é ${correct}.`;
+        feedback.style.color = "red";
+      }
+      document.getElementById("score").textContent = "Pontuação: " + score;
+    }
+  </script>
+</body>
+</html>

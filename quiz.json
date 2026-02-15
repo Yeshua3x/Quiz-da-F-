@@ -1,0 +1,50 @@
+{
+  "genesis": [
+    {
+      "pergunta": "Quem foram os primeiros seres humanos criados por Deus?",
+      "correta": "Adão e Eva",
+      "opcoes": ["Abraão e Sara", "Caim e Abel", "Noé e sua esposa"]
+    },
+    {
+      "pergunta": "Quem construiu a arca para sobreviver ao dilúvio?",
+      "correta": "Noé",
+      "opcoes": ["Moisés", "Abraão", "Jacó"]
+    }
+  ],
+  "salmos": [
+    {
+      "pergunta": "Quem é tradicionalmente considerado o autor de muitos Salmos?",
+      "correta": "Davi",
+      "opcoes": ["Salomão", "Moisés", "Isaías"]
+    },
+    {
+      "pergunta": "Qual é o Salmo que começa com 'O Senhor é meu pastor'?",
+      "correta": "Salmo 23",
+      "opcoes": ["Salmo 91", "Salmo 1", "Salmo 119"]
+    }
+  ],
+  "joao": [
+    {
+      "pergunta": "Qual foi o primeiro milagre de Jesus relatado em João?",
+      "correta": "Transformar água em vinho",
+      "opcoes": ["Curar um cego", "Multiplicar pães", "Andar sobre as águas"]
+    },
+    {
+      "pergunta": "Qual versículo diz 'Eu sou o caminho, a verdade e a vida'?",
+      "correta": "João 14:6",
+      "opcoes": ["João 3:16", "João 8:12", "João 10:10"]
+    }
+  ],
+  "mateus": [
+    {
+      "pergunta": "Qual oração Jesus ensinou em Mateus 6?",
+      "correta": "O Pai Nosso",
+      "opcoes": ["Ave Maria", "Credo", "Salmo 23"]
+    },
+    {
+      "pergunta": "Quantas bem-aventuranças aparecem no Sermão da Montanha?",
+      "correta": "8",
+      "opcoes": ["7", "10", "12"]
+    }
+  ]
+}
